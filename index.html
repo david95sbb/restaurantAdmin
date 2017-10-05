@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página administrativa</title>
+</head>
+<body>
+<h2>Panel administrativo</h2>
+<div>
+    <form onsubmit="addPlatillo()">
+        Nombre: <input type="text" name="name" id="name" ><br><br>
+        Descripción: <input type="text" name="description" id="description"><br><br>
+        Precio: <input type="number" name="price" id="price"><br><br>
+        <input type="submit" value="Subir">
+    </form>
+</div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+<script type="text/javascript" src="index.js"></script>
+</html>
