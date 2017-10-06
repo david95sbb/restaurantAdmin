@@ -11,10 +11,18 @@ var config = {
 firebase.initializeApp(config);
 
 /**
- * Database
+ * Database firebas
  * @private
  */
 var _database = firebase.database();
+
+/**
+ * Storage firebase
+ * @private
+ */
+var _storage = firebase.storage();
+
+var _storageRef = _storage.ref();
 
 /**
  * Add new platillo
@@ -40,4 +48,32 @@ function addPlatillo() {
     var _description = document.getElementById("description").value;
     var _price = document.getElementById("price").value;
     _createPlatilloDatabase( _name, _description, _price );
+}
+
+/**
+ * View image the input file
+ */
+function viewImg() {
+    var _preview = document.querySelector( 'img' );
+    var _file = document.querySelector( 'input[type=file]' ).files[0];
+    var _lector = new FileReader();
+    _lector.onloadend= function () {
+        _preview.src = _lector.result;
+    }
+    if ( _file ) {
+        _lector.readAsDataURL( _file );
+        var _putImg = _storageRef.child( "platillos/"+ _file.name ).put( _file );
+        _putImg.on( "state_changed", function ( snapshot ) {
+            //change on load the file
+            
+        }, function error ( e ) {
+            //error in the load file
+            console.warn(e);
+        }, function success () {
+            //success load file
+            console.log( _putImg.snapshot.downloadURL );
+        } )
+    }else{
+        _preview.src = "";
+    }
 }

@@ -7,6 +7,10 @@
 <body>
 <h2>Panel administrativo</h2>
 <div>
+    <input type="file" name="imagen" onchange="viewImg()"><br><br><br>
+    <img src="" alt="Imagen de platillo" height="300" id="imgPlatillo">
+</div>
+<div>
     <form onsubmit="addPlatillo()">
         Nombre: <input type="text" name="name" id="name" ><br><br>
         Descripción: <input type="text" name="description" id="description"><br><br>
