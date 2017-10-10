@@ -60,7 +60,13 @@ function addPlatillo() {
     var _description = document.getElementById( "description" ).value;
     var _price = document.getElementById( "price" ).value;
     var _imgDir = document.getElementById( "imgDir" ).value;
-    _createPlatilloDatabase( _name, _description, _price, _imgDir );
+
+    try{
+        _createPlatilloDatabase( _name, _description, _price, _imgDir );
+        alert( "Platillo agregado" );
+    } catch( error ) {
+        console.warn( "no se agrego el platillo " + error );
+    }
 }
 
 /**
@@ -105,19 +111,45 @@ function getPlatillos() {
             var _li = document.createElement( "li" );
             var _div = document.createElement( "div" );
             var _img = document.createElement( "img" );
-            var _br = document.createElement( "br" );
+            var _button = document.createElement( "button" );
+
+            _button.setAttribute( "id", _childKey );
+            _button.setAttribute( "onclick", "deletePlatillos( this.id )" );
+            _button.setAttribute( "class", "btn btn-danger" );
+            _button.appendChild( document.createTextNode( "Eliminar" ) );
 
             _img.src = _childData.img;
             _img.height = 60;
             _img.alt = "Imágen del platillo";
 
             _div.appendChild( _img );
+            _div.style.float = "right";
+
+            _li.setAttribute( "class", "list-group-item" );
             _li.appendChild( _div );
             _li.appendChild( document.createTextNode( "Name: " + _childData.name ) );
+            _li.appendChild( document.createElement( "br" ) );
             _li.appendChild( document.createTextNode( "Description: " + _childData.description ) );
+            _li.appendChild( document.createElement( "br" ) );
             _li.appendChild( document.createTextNode( "Price: " + _childData.price ) );
+            _li.appendChild( document.createElement( "br" ) );
+            _li.appendChild( _button );
+
             _ul.appendChild( _li );
         } );
-        console.log( snapshot.val() );
     } );
+}
+
+/**
+ * Delete platillo
+ * @param idPlatillo {number}
+ */
+function deletePlatillos( idPlatillo ) {
+    _database.ref( 'alimentos/' + idPlatillo ).remove()
+        .then( function succes() {
+
+        } )
+        .catch( function error ( e ) {
+            console.warn( "error: " + e );
+        } )
 }

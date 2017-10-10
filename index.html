@@ -11,20 +11,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 <body>
-<h2>Panel administrativo</h2>
-<a href="./platillos.html">Platillos</a>
-<div>
-    <input type="file" name="imagen" onchange="viewImg()"><br><br><br>
-    <img src="" alt="Imagen de platillo" height="300" id="imgPlatillo">
-</div>
-<div>
-    <form onsubmit="addPlatillo()">
-        Nombre: <input type="text" name="name" id="name" required><br><br>
-        Descripción: <input type="text" name="description" id="description" required><br><br>
-        Precio: <input type="number" name="price" id="price" required><br><br>
-        Dirección Imágen: <input type="text" name="imgDir" id="imgDir" required><br><br>
-        <input type="submit" value="Subir">
-    </form>
+<div class="container">
+    <div class="jumbotron">
+        <h2>Panel administrativo</h2>
+    </div>
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active">
+            <a href="./platillos.html">Platillos</a>
+        </li>
+    </ul>
+    <br><br>
+    <div>
+        <input type="file" name="imagen" onchange="viewImg()"><br><br><br>
+        <img src="" alt="Imagen de platillo" height="300" id="imgPlatillo">
+    </div>
+    <div>
+        <form onsubmit="addPlatillo()">
+            Nombre: <input class="form-control" type="text" name="name" id="name" required><br><br>
+            Descripción: <input class="form-control" type="text" name="description" id="description" required><br><br>
+            Precio: <input class="form-control" type="number" name="price" id="price" required><br><br>
+            Dirección Imágen: <input class="form-control" type="text" name="imgDir" id="imgDir" required><br><br>
+            <input class="btn btn-success" type="submit" value="Subir">
+        </form>
+    </div>
 </div>
 </body>
 <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
