@@ -171,7 +171,7 @@ function viewImg( src ) {
  * Get platillos
  */
 function getPlatillos() {
-    _refAlimentosTable.on( "value", function ( snapshot ) {
+    _refAlimentosTable.once( "value", function ( snapshot ) {
         snapshot.forEach( function ( childSnapshot ) {
             var _ul = document.getElementById( "lista" );
             var _childKey = childSnapshot.key;
@@ -194,6 +194,7 @@ function getPlatillos() {
             _div.style.float = "right";
 
             _li.setAttribute( "class", "list-group-item" );
+            _li.setAttribute( "id", "'" + _childKey + "'" );
             _li.appendChild( _div );
             _li.appendChild( document.createTextNode( "Name: " + _childData.name ) );
             _li.appendChild( document.createElement( "br" ) );
@@ -212,7 +213,7 @@ function getPlatillos() {
  * Get bebidas
  */
 function getBebidas() {
-    _refBebidasTable.on( "value", function ( snapshot ) {
+    _refBebidasTable.once( "value", function ( snapshot ) {
         snapshot.forEach( function ( childSnapshot ) {
             var _ul = document.getElementById( "lista" );
             var _childKey = childSnapshot.key;
@@ -235,6 +236,7 @@ function getBebidas() {
             _div.style.float = "right";
 
             _li.setAttribute( "class", "list-group-item" );
+            _li.setAttribute( "id", "'" + _childKey + "'" );
             _li.appendChild( _div );
             _li.appendChild( document.createTextNode( "Name: " + _childData.name ) );
             _li.appendChild( document.createElement( "br" ) );
@@ -256,11 +258,13 @@ function getBebidas() {
 function deletePlatillos( idPlatillo ) {
     _database.ref( 'alimentos/' + idPlatillo ).remove()
         .then( function succes() {
-            window.location = "platillos.html";
+            var _ul = document.getElementById( "lista" );
+            var _li = document.getElementById( "'" + idPlatillo + "'" );
+            _ul.removeChild( _li );
         } )
         .catch( function error ( e ) {
             console.warn( "error: " + e );
-        } )
+        } );
 }
 
 /**
@@ -270,7 +274,9 @@ function deletePlatillos( idPlatillo ) {
 function deleteBebidas( idBebida ) {
     _database.ref( 'bebidas/' + idBebida ).remove()
         .then( function succes() {
-            window.location = "bebidas.html";
+            var _ul = document.getElementById( "lista" );
+            var _li = document.getElementById( "'" + idBebida + "'" );
+            _ul.removeChild( _li );
         } )
         .catch( function error ( e ) {
             console.warn( "error: " + e );
